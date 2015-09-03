@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "good": "^6.1.2",
+    "good-console": "^5.0.0",
+    "handlebars": "^3.0.3",
+    "hapi": "^8.4.0",
+    "psi": "^1.0.6"
+  },
+  "engines": {
+    "node": "0.12",
+    "npm": "2.x"
+  }
+}
