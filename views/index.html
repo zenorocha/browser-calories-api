@@ -17,24 +17,11 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <b>Total Page Size</b>
-          822 KB
+          <b>Total Size</b>
+          {{siteBytes.total}}
         </th>
         <td>
-          Requests
-          56
-        </td>
-      </tr>
-      <tr>
-        <td class="blank-cell">
-        </td>
-        <th>
-          Cached Size
-          34 KB
-        </th>
-        <td>
-          Requests
-          38
+          Resources {{numberResources}}
         </td>
       </tr>
       <tr class="thick-row">
@@ -44,160 +31,88 @@
       </tr>
       <tr>
         <th colspan="2">
-          <b>Document</b> 27 KB
+          <b>HTML</b> {{siteBytes.html}}
         </th>
         <td>
-          <b>3%</b>
+          <b>{{dailyPercentage.html}}%</b>
         </td>
       </tr>
       <tr>
         <th colspan="2">
-          <b>Images (15)</b>
-          533 KB
+          <b>Images</b>
+          {{siteBytes.image}}
         </th>
         <td>
-          <b>52%</b>
-        </td>
-      </tr>
-      <tr>
-        <td class="blank-cell">
-        </td>
-        <th>
-          SVG
-          (1, inline)
-        </th>
-        <td>
-        </td>
-      </tr>
-      <tr>
-        <td class="blank-cell">
-        </td>
-        <th>
-          Retina Hero Images
-          (1)
-          84 KB
-        </th>
-        <td>
-          8%
+          <b>{{dailyPercentage.image}}%</b>
         </td>
       </tr>
       <tr>
         <th colspan="2">
-          <b>CSS (6)</b>
-          13.3 KB
+          <b>CSS</b>
+          {{siteBytes.css}}
         </th>
         <td>
-          <b>1%</b>
+          <b>{{dailyPercentage.css}}%</b>
         </td>
       </tr>
       <tr>
         <th colspan="2">
-          <b>Fonts (13)</b>
-          6.7 KB
+          <b>JavaScript</b>
+          {{siteBytes.js}}
         </th>
         <td>
-          <b>1%</b>
-        </td>
-      </tr>
-      <tr>
-        <th colspan="2">
-          <b>JavaScript (13)</b>
-          86 KB
-        </th>
-        <td>
-          <b>8%</b>
+          <b>{{dailyPercentage.js}}%</b>
         </td>
       </tr>
       <tr class="thick-end">
-        <td class="blank-cell">
-        </td>
-        <th>
-          Libraries / Third-Party (9)
+        <th colspan="2">
+          <b>Other</b>
+          {{siteBytes.other}}
         </th>
         <td>
+          <b>{{dailyPercentage.other}}%</b>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <table class="performance-facts__table--grid">
-    <tbody>
-      <tr>
-        <td colspan="2">
-          Original Content
-          18%
-        </td>
-        <td>
-          Branding
-          5%
-        </td>
-      </tr>
-      <tr class="thin-end">
-        <td colspan="2">
-          Advertising
-          10%
-        </td>
-        <td>
-          Navigation
-          4%
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p class="small-info">* Values are based on an average 1 MB website. Your daily values may be higher or lower depending on your business needs:</p>
+  <p class="small-info">* Values are based on an <a target="_blank" href="http://httparchive.org/interesting.php">average {{budgetBytes.total}} website</a>. Your daily values may be higher or lower depending on your needs:</p>
 
   <table class="performance-facts__table--small small-info">
     <thead>
       <tr>
         <td colspan="2"></td>
         <th>Size:</th>
-        <th>750 KB</th>
-        <th>1 MB</th>
+        <th>{{budgetBytes.total}}</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th colspan="2">Total Size</th>
+        <th colspan="2">HTML</th>
         <td>Less than</td>
-        <td>750 KB</td>
-        <td>1 MB</td>
-      </tr>
-      <tr>
-        <td class="blank-cell"></td>
-        <th>Advertising</th>
-        <td>Less than</td>
-        <td>75 KB</td>
-        <td>100 KB</td>
+        <td>{{budgetBytes.html}}</td>
       </tr>
       <tr>
         <th colspan="2">Images</th>
         <td>Less than</td>
-        <td>250 KB</td>
-        <td>350 KB</td>
+        <td>{{budgetBytes.image}}</td>
       </tr>
       <tr>
         <th colspan="2">CSS</th>
         <td>Less than</td>
-        <td>75 KB</td>
-        <td>100 KB</td>
+        <td>{{budgetBytes.css}}</td>
       </tr>
       <tr>
-        <th colspan="3">JavaScript</th>
-        <td>150 KB</td>
-        <td>200 KBg</td>
+        <th colspan="2">JavaScript</th>
+        <td>Less than</td>
+        <td>{{budgetBytes.js}}</td>
       </tr>
       <tr>
-        <td class="blank-cell"></td>
-        <th colspan="2">Third-Party</th>
-        <td>25 KB</td>
-        <td>35 KB</td>
+        <th colspan="2">Other</th>
+        <td>Less than</td>
+        <td>{{budgetBytes.other}}</td>
       </tr>
     </tbody>
   </table>
-
-  <p class="small-info">
-    In case it isn't obvious, this entire thing is very tounge-in-cheek. Don't take it too seriously.
-  </p>
 
 </section>
