@@ -5,22 +5,16 @@ var Hapi = require('hapi');
 var server = new Hapi.Server();
 
 server.connection({
-    port: process.env.PORT || 4000,
-    router: {
-        stripTrailingSlash: true
+    port: process.env.PORT || 4000
+});
+
+server.route([
+    {
+        method: 'GET',
+        path: '/',
+        handler: require('./controllers/index')
     }
-});
-
-server.route(require('./routes'));
-
-server.views({
-    engines: {
-        html: require('handlebars')
-    },
-    path: 'views',
-    layoutPath: 'views/layout',
-    layout: 'default'
-});
+]);
 
 // -- Start --------------------------------------------------------------------
 

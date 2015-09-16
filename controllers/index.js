@@ -14,7 +14,7 @@ function controller(request, reply) {
 		site = controller.toInt(res.pageStats);
 		site.total = controller.toTotal(site);
 
-		return reply.view('index', {
+		return reply({
 			siteBytes       : controller.toBytes(site),
 			budgetBytes     : controller.toBytes(budget),
 			dailyPercentage : controller.toPercentage(site, budget),
