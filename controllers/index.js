@@ -62,7 +62,7 @@ controller.toPercentage = function(a, b) {
 
 	for (item in a) {
 		if (a.hasOwnProperty(item) && b.hasOwnProperty(item)) {
-			obj[item] = Math.round((a[item] / b[item]) * 100);
+			obj[item] = Math.round((a[item] / b[item]) * 100) + '%';
 		}
 	}
 
