@@ -50,7 +50,7 @@ controller.toBytes = function(data) {
 
 	for (item in data) {
 		if (data.hasOwnProperty(item)) {
-			obj[item] = bytes(data[item], 1);
+			obj[item] = bytes(data[item], { precision: 1 });
 		}
 	}
 
