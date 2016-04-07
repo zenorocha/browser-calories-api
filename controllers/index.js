@@ -23,28 +23,6 @@ function controller(request, reply) {
 	});
 }
 
-controller.toInt = function(data) {
-	return {
-		html  : parseInt(data.htmlResponseBytes, 10) || 0,
-		css   : parseInt(data.cssResponseBytes, 10) || 0,
-		image : parseInt(data.imageResponseBytes, 10) || 0,
-		js    : parseInt(data.javascriptResponseBytes, 10) || 0,
-		other : parseInt(data.otherResponseBytes, 10) || 0
-	};
-}
-
-controller.toTotal = function(data) {
-	var total = 0;
-
-	for (item in data) {
-		if (data.hasOwnProperty(item)) {
-			total += data[item];
-		}
-	}
-
-	return total;
-}
-
 controller.toBytes = function(data) {
 	var obj = {};
 
