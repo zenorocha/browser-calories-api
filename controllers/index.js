@@ -1,24 +1,29 @@
 var boom   = require('boom');
 var budget = require('../data/budget');
 var bytes  = require('byte-size');
-var psi    = require('psi');
+var phantomas = require('phantomas');
 
 function controller(request, reply) {
 	var url = decodeURIComponent(request.query.url);
 
-	psi(url, function(err, res) {
-		if (err) {
-			return reply(boom.create(err.code, err.message));
+	phantomas(url, function(error, response) {
+		if (error) {
+			return reply(boom.create(error.code, error.message));
 		}
 
-		site = controller.toInt(res.pageStats);
-		site.total = controller.toTotal(site);
+		var site = {
+			html  : response.metrics.htmlSize,
+			css   : response.metrics.cssSize,
+			image : response.metrics.imageSize,
+			js    : response.metrics.jsSize,
+			other : response.metrics.otherSize,
+			total : response.metrics.contentLength
+		};
 
 		return reply({
-			siteBytes       : controller.toBytes(site),
-			budgetBytes     : controller.toBytes(budget),
-			dailyPercentage : controller.toPercentage(site, budget),
-			numberResources : res.pageStats.numberResources
+			siteBytes: controller.toBytes(site),
+			budgetBytes: controller.toBytes(budget),
+			dailyPercentage: controller.toPercentage(site, budget)
 		});
 	});
 }
