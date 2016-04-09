@@ -5,8 +5,6 @@
 
 > A microservice that fetches web performance metrics from a particular URL.
 
-Built with [Node](http://nodejs.org/), [Hapi](http://hapijs.com/) and [Phantomas](https://www.npmjs.com/package/phantomas). Hosted on [Heroku](https://heroku.com/). Monitored on [New Relic](https://newrelic.com/).
-
 ## Setup
 
 Install dependencies:
@@ -21,7 +19,7 @@ Run it:
 npm start
 ```
 
-The server should be initialized at `localhost:4000`.
+The server should be initialized at `localhost:3000`.
 
 ## License
 
