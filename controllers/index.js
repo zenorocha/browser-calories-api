@@ -1,55 +1,55 @@
-var boom   = require('boom');
-var budget = require('../data/budget');
-var bytes  = require('byte-size');
+var boom = require('boom');
 var phantomas = require('phantomas');
 
 function controller(request, reply) {
   var url = decodeURIComponent(request.query.url);
 
-  phantomas(url, function(error, response) {
-    if (error) {
-      return reply(boom.create(error.code, error.message));
+  phantomas(url, function(err, res) {
+    if (err) {
+      return reply(controller.formatError(err.message));
     }
 
-    var site = {
-      html  : response.metrics.htmlSize,
-      css   : response.metrics.cssSize,
-      image : response.metrics.imageSize,
-      js    : response.metrics.jsSize,
-      other : response.metrics.otherSize,
-      total : response.metrics.contentLength
-    };
-
-    return reply({
-      siteBytes: controller.toBytes(site),
-      budgetBytes: controller.toBytes(budget),
-      dailyPercentage: controller.toPercentage(site, budget)
-    });
+    return reply(controller.formatResponse(res.metrics));
   });
 }
 
-controller.toBytes = function(data) {
-  var obj = {};
+/*
+ * Converts Phantomas exit errors to HTTP status codes
+ * Reference: https://git.io/vVScR
+ */
+controller.formatError = function(exitCode) {
+  var statusCode = 500;
 
-  for (item in data) {
-    if (data.hasOwnProperty(item)) {
-      obj[item] = bytes(data[item], { precision: 1 });
-    }
+  switch (exitCode) {
+    case "252":
+      statusCode = 408;
+      break;
+    case "253":
+      statusCode = 418;
+      break;
+    case "254":
+      statusCode = 400;
+      break;
+    case "255":
+      statusCode = 405;
+      break;
   }
 
-  return obj;
-}
+  return boom.create(statusCode);
+};
 
-controller.toPercentage = function(a, b) {
-  var obj = {};
-
-  for (item in a) {
-    if (a.hasOwnProperty(item) && b.hasOwnProperty(item)) {
-      obj[item] = Math.round((a[item] / b[item]) * 100) + '%';
-    }
-  }
-
-  return obj;
-}
+/*
+ * Sanitizes Phantomas success response object
+ */
+controller.formatResponse = function(data) {
+  return {
+    html  : data.htmlSize,
+    css   : data.cssSize,
+    image : data.imageSize,
+    js    : data.jsSize,
+    other : data.otherSize,
+    total : data.contentLength
+  };
+};
 
 module.exports = controller;
