@@ -44,9 +44,11 @@ controller.formatError = function(exitCode) {
 controller.formatResponse = function(data) {
   return {
     html  : data.htmlSize,
-    css   : data.cssSize,
     image : data.imageSize,
+    css   : data.cssSize,
     js    : data.jsSize,
+    font  : data.webfontSize,
+    video : data.videoSize,
     other : data.otherSize,
     total : data.contentLength
   };
