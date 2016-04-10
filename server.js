@@ -1,3 +1,7 @@
+if (process.env.PRODUCTION) {
+  require('newrelic');
+}
+
 var Hapi = require('hapi');
 
 // -- Setup --------------------------------------------------------------------
