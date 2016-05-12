@@ -1,57 +1,56 @@
 var boom = require('boom');
-var phantomas = require('phantomas');
+var psi  = require('psi');
 
 function controller(request, reply) {
   var url = decodeURIComponent(request.query.url);
+  var options = controller.getOptions();
 
-  phantomas(url, function(err, res) {
-    if (err) {
-      return reply(controller.formatError(err.message));
-    }
+  psi(url, options).then(function(data) {
+    var result = {};
 
-    return reply(controller.formatResponse(res.metrics));
+    result = controller.toInt(data.pageStats);
+    result.total = controller.toTotal(result);
+
+    return reply(result);
   });
 }
 
-/*
- * Converts Phantomas exit errors to HTTP status codes
- * Reference: https://git.io/vVScR
- */
-controller.formatError = function(exitCode) {
-  var statusCode = 500;
+controller.getOptions = function() {
+  var options;
 
-  switch (exitCode) {
-    case "252":
-      statusCode = 408;
-      break;
-    case "253":
-      statusCode = 418;
-      break;
-    case "254":
-      statusCode = 400;
-      break;
-    case "255":
-      statusCode = 405;
-      break;
+  if (process.env.API_KEY) {
+    options = {
+      key: process.env.API_KEY
+    };
+  } else {
+    options = {
+      nokey: true
+    };
   }
 
-  return boom.create(statusCode);
+  return options;
 };
 
-/*
- * Sanitizes Phantomas success response object
- */
-controller.formatResponse = function(data) {
+controller.toInt = function(data) {
   return {
-    html  : data.htmlSize,
-    image : data.imageSize,
-    css   : data.cssSize,
-    js    : data.jsSize,
-    font  : data.webfontSize,
-    video : data.videoSize,
-    other : data.otherSize,
-    total : data.contentLength
+    html  : parseInt(data.htmlResponseBytes, 10) || 0,
+    css   : parseInt(data.cssResponseBytes, 10) || 0,
+    image : parseInt(data.imageResponseBytes, 10) || 0,
+    js    : parseInt(data.javascriptResponseBytes, 10) || 0,
+    other : parseInt(data.otherResponseBytes, 10) || 0
   };
+}
+
+controller.toTotal = function(data) {
+  var total = 0;
+
+  for (item in data) {
+    if (data.hasOwnProperty(item)) {
+      total += data[item];
+    }
+  }
+
+  return total;
 };
 
 module.exports = controller;
