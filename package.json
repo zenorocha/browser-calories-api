@@ -11,6 +11,7 @@
     "good-console": "^5.0.0",
     "hapi": "^13.3.0",
     "newrelic": "^1.26.2",
-    "superagent": "^1.8.3"
+    "superagent": "^1.8.3",
+    "superagent-throttle": "0.0.9"
   }
 }

@@ -1,9 +1,18 @@
 var boom = require('boom');
 var superagent = require('superagent');
+var Throttle = require('superagent-throttle');
 
 function controller(request, reply) {
+  this.throttle = new Throttle({
+    active: true,
+    rate: 5,
+    ratePer: 10000,
+    concurrent: 3
+  });
+
   superagent
     .get(controller.getUrl(request.query.url))
+    .use(this.throttle.plugin)
     .end(function(error, response) {
       if (error || !response.ok) {
         return reply(controller.getError(response.error));
