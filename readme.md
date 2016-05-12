@@ -5,7 +5,7 @@
 
 > A microservice that fetches web performance metrics from a particular URL.
 
-Built with [Node](http://nodejs.org/), [Hapi](http://hapijs.com/) and [Phantomas](https://www.npmjs.com/package/phantomas). Hosted on [Heroku](https://heroku.com/). Monitored on [New Relic](https://newrelic.com/).
+Built with [Node](http://nodejs.org/), [Hapi](http://hapijs.com/) and [PageSpeed](https://developers.google.com/speed/docs/insights/v2/getting-started). Hosted on [Heroku](https://heroku.com/). Monitored on [New Relic](https://newrelic.com/).
 
 ## Setup
 
@@ -22,6 +22,14 @@ npm start
 ```
 
 The server should be initialized at `localhost:4000`.
+
+## Usage
+
+Just include the `url` parameter on your request and have fun!
+
+```
+curl http://localhost:4000/?url=https://github.com/zenorocha
+```
 
 ## License
 
